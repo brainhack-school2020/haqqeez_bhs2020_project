@@ -22,7 +22,7 @@ Meanwhile, Calcium imaging data looks similar to what you would see in 'spiking'
 
 <img src="calciumraster.PNG" width=200>     <img src="calciumrasterzoomout.PNG" width=200> (sorry for using jet colormap! ^^' )
 
-For the bottom plot, The y axis is each one individual cell. The x-axis is time (in frames). A more yellow colour = stronger fluoresence measured = higher calcium = inferred neuronal activity (action potentials, graded potentials, synaptic potentials etc.)
+For the bottom plot (left; zoomed in, right; same but zoomed out) The y axis is each one individual cell. The x-axis is time (in frames). A more yellow colour = stronger fluoresence measured = higher calcium = inferred neuronal activity (action potentials, graded potentials, synaptic potentials etc.)
 
 Big overarching question: How does neural activity change over time as the animal gets better at the memory task? Are there clusters of cells that activate during certain events? (Incorrect vs. correct choices, left vs. right vs middle response, etc.).
 
