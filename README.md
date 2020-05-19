@@ -16,11 +16,11 @@ For each animal, in a single session of recording, I have have time series data 
 
 The goal of the task is for the mouse to learn the specific objects give reward only if they are in specific locations. Otherwise, they are a distractor. 6 Different trial type combinations exist from 3 object-location associations that they need to learn. These 6 trial types are presented randomly. 36 total trials (6 x 6) per session:
 
-
+<img src="BehavTask.png" width=170>  <img src="MouseChamberOutline.PNG" width=290>
 
 Meanwhile, Calcium imaging data looks similar to what you would see in 'spiking' data for single-unit electrophysiology. Plus a spatial 'footprint' of what the miniscope camera sees as individual cells (circles) when recording activity in the brain (top plot).
 
-
+<img src="calciumraster.PNG" width=200>     <img src="calciumrasterzoomout.PNG" width=200> (sorry for using jet colormap! ^^' )
 
 For the bottom plot, The y axis is each one individual cell. The x-axis is time (in frames). A more yellow colour = stronger fluoresence measured = higher calcium = inferred neuronal activity (action potentials, graded potentials, synaptic potentials etc.)
 
