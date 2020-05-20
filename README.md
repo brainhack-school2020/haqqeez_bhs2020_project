@@ -20,11 +20,11 @@ The mouse completes the task with a miniatrue microscope (miniscope) implanted o
 
 This is what the camera sees. A MATLAB script takes each frame and determines which groups of pixels are neurons and which are not and tags and counts them.
 
-<img src="neurons4.gif" width=420>
+<img src="neurons4.gif" width=360>
 
 Once tagged, each neurons's brightness level is measured to infer calcium activity. The raster plots generated here looks similar to what you would see in 'spiking' data for single-unit electrophysiology.
 
-<img src="calciumrasterzoomin.png" width=300>     <img src="calciumrasterzoomout.PNG" width=300>
+<img src="calciumrasterzoomin.png" width=266>     <img src="calciumrasterzoomout.PNG" width=300>
 
 (left; zoomed in, right; same but zoomed out) The y axis is each one individual neuron. The x-axis is time (in frames; ~30ms). A more yellow colour = stronger fluoresence measured = higher likelihood of neuronal activity.
 
@@ -36,8 +36,9 @@ For a detailed review of methodology, see: https://www.biorxiv.org/content/10.11
 
 ### Data 
 
+Behavioural data is time-stamped for every action done by the animal (touching the screen, drinking reward, incorrect choice, correct choice, etc.)
 
-
+Calcium data is a matrix representing NumberofCells x TotalFrames (e.g., 100 cells and 30,000 frames is a 100 x 30000 matrix). Where each value in the matrix represents fluoresence level (inferred spiking probability) for a particular cell at a particular frame in time.
 
 ### Deliverables
 
