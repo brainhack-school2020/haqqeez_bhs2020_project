@@ -1,40 +1,41 @@
 # haqqeez_bhs2020_project
 
-Team contributors: Zeeshan Haqqee
-
 ## Summary 
 
-I have in-vivo calcium imaging data in mice while they performed behavioural learning tasks in a touchscreen chamber. I want to figure a way to consolidate the neural data (activity of hundreds of individual cells over time (~3000 30ms time bins)) with behavioural data (actions and decisions made by the animal during their behavioural task).
+I have calcium imaging data in mice while they performed behavioural learning tasks in a touchscreen chamber. I want to figure a way to consolidate the neural data (activity of ~100 individual cells over time (~30,000 x ~30ms time bins)) with behavioural data (time-stamped actions and decisions made by the animal during their behavioural task).
 
 ## Project definition 
 
-### Background
+### Background: Behavioural task
 
-For BHS, project details TBD. Currently trying to figure out what would be interesting to analyze/decode from my data.
+The goal of the task is for the mouse to learn that specific objects on the screen will give a reward only if they are touched when in specific locations. Otherwise, they are a distractor. For example, for Trial type 1, the flower will give a reward because it is displayed on the left, but the spider will not. For Trial type 6, the flower will not give a reward because it is in the middle, but the spider will, because it is on the right.
 
-For each animal, in a single session of recording, I have have time series data (in the form of calcium activity) of 100-300 individual neurons, recorded over roughly 3000 time bins (frames). Separately, I have behavioural data in the form of scores (% correct performance on individual trials of the memory task the animal does), reaction times, latency, error rate, etc. 
+6 Different trial type combinations exist from 3 object-location associations (flower-left, airplane-middle, spider-right) that the mice need to learn. These 6 trial types are presented randomly. 36 total trials (6 x 6) per session:
 
-The goal of the task is for the mouse to learn the specific objects give reward only if they are in specific locations. Otherwise, they are a distractor. 6 Different trial type combinations exist from 3 object-location associations that they need to learn. These 6 trial types are presented randomly. 36 total trials (6 x 6) per session:
+<img src="BehavTask.png" width=170>   <img src="MouseChamberOutline.PNG" width=320>     <img src="LearningCurve.PNG" width=320>
 
-<img src="BehavTask.png" width=170>  <img src="MouseChamberOutline.PNG" width=320>     <img src="LearningCurve.PNG" width=300>
+### Background: Calcium imaging
 
-Meanwhile, Calcium imaging data looks similar to what you would see in 'spiking' data for single-unit electrophysiology. Plus a spatial 'footprint' of what the miniscope camera sees as individual cells (circles) when recording activity in the brain (top plot).
+The mouse completes the task with a miniatrue microscope (miniscope) implanted on its head, which shines an LED light onto an implanted lens to illuminate genetically modified neurons that fluoresce (i.e., light-up) whenever calcium is being used by the cell. In the same way that fMRI infers brain activity from blood-oxygen levels, calcium imaging infers neuronal activity from calcium concentration in the cell (indicating action potentials, graded potentials, synaptic potentials etc.)
 
-<img src="calciumraster.PNG" width=300>     <img src="calciumrasterzoomout.PNG" width=300> (sorry for using jet colormap! ^^' )
+This is what the camera sees. A MATLAB script takes each frame and determines which groups of pixels are neurons and which are not and tags and counts them.
 
-For the bottom plot (left; zoomed in, right; same but zoomed out) The y axis is each one individual cell. The x-axis is time (in frames). A more yellow colour = stronger fluoresence measured = higher calcium = inferred neuronal activity (action potentials, graded potentials, synaptic potentials etc.)
+<img src="neurons4.gif" width=420>
+
+Once tagged, each neurons's brightness level is measured to infer calcium activity. The raster plots generated here looks similar to what you would see in 'spiking' data for single-unit electrophysiology.
+
+<img src="calciumrasterzoomin.png" width=300>     <img src="calciumrasterzoomout.PNG" width=300>
+
+(left; zoomed in, right; same but zoomed out) The y axis is each one individual neuron. The x-axis is time (in frames; ~30ms). A more yellow colour = stronger fluoresence measured = higher likelihood of neuronal activity.
 
 Big overarching question: How does neural activity change over time as the animal gets better at the memory task? Are there clusters of cells that activate during certain events? (Incorrect vs. correct choices, left vs. right vs middle response, etc.).
 
 
-
-### Tools 
-
 For a detailed review of methodology, see: https://www.biorxiv.org/content/10.1101/2020.02.06.937573v1.full
 
 
-
 ### Data 
+
 
 
 
