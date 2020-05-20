@@ -31,7 +31,7 @@ Once tagged, each neurons's brightness level is measured to infer calcium activi
 Big overarching question: How does neural activity change over time as the animal gets better at the memory task? Are there clusters of cells that activate during certain events? (Incorrect vs. correct choices, left vs. right vs middle response, etc.).
 
 
-For a detailed review of methodology, see: https://www.biorxiv.org/content/10.1101/2020.02.06.937573v1.full
+For a detailed review of general tools and methodology, see: https://www.biorxiv.org/content/10.1101/2020.02.06.937573v1.full
 
 
 ### Data 
