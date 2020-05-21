@@ -60,11 +60,11 @@ Target variable will be CATEGORICAL (Correct vs Incorrect vs. Neither). Predict 
 
 ### Tools
 
-*Python
-*Jupyter notebooks
-*nilearn
-*scikitlearn
-*MATLAB
+* Python
+* Jupyter notebooks
+* nilearn
+* scikitlearn
+* MATLAB
 
 ### Deliverables
 
