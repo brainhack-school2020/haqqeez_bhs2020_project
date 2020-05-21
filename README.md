@@ -40,9 +40,38 @@ Behavioural data is time-stamped for every action done by the animal (touching t
 
 Calcium data is a matrix representing NumberofCells x TotalFrames (e.g., 100 cells and 30,000 frames is a 100 x 30000 matrix). Where each value in the matrix represents fluoresence level (inferred spiking probability) for a particular cell at a particular frame in time.
 
+### Goals
+
+I will try to adapt what I learned from the fMRI machine learning tutorial to accomplish two goals:
+
+* Define correlation matrices between neurons and compare strengths over time; does it change with learning?
+* Use machine learning to predict and decode correct vs incorrect events in the population activity of the cells.
+
+Recall from the machine learning tutorial, we looked at activity of different subjects. For each subject, activity for each brain region was averaged across time and then correlated with brain regions in a correlation matrix. We then took each correlation matrix and created a new feature matrix across all subjects, then looked for a target variable, age, across subjects.
+
+For my data I only have one animal and a few different days. So will have to adapt:
+
+Subjects = Trials (42 attempts/decisions made in a session)
+time_series array = (120 frames, 100 neurons)
+Correlation matrix for ONE subject (trial) = 100 x 100 neurons array
+Feature matrix = 42 subjects (trials) x 10,000 features (neurons)
+
+Target variable will be CATEGORICAL (Correct vs Incorrect vs. Neither). Predict which subject (Trial) belongs to which category (correct/incorrect decision) from the neuronal data.
+
+### Tools
+
+*Python
+*Jupyter notebooks
+*nilearn
+*scikitlearn
+*MATLAB
+
 ### Deliverables
 
-At the end of this project, we will have:
+At the end of this project, I aim to have:
+
+* Pairwise correlation data for neurons for each trial event in a session, possibly across different sessions (days)
+* A rough machine learning pipeline to decode different types of events in the behaviour
  
 ## Results 
 
