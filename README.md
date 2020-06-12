@@ -40,7 +40,56 @@ Behavioural data is time-stamped for every action done by the animal (touching t
 
 Calcium data is a matrix representing NumberofCells x TotalFrames (e.g., 100 cells and 30,000 frames is a 100 x 30000 matrix). Where each value in the matrix represents fluoresence level (inferred spiking probability) for a particular cell at a particular frame in time.
 
-### Goals
+Hence, the design of my data uses the activity of individual neurons as its features (x-values), the behavioural events as its dependent or predictor variables (y-values). A 'sample' here is defined as each individual attempt made by animal on the task.
+
+<img src="timeseriestable.png">
+
+Note: Ones and zeros here denote the cell being 'on' or 'off' for sake of simplicity. In reality, the activity is defined as a transient of activity based on the change in fluoresence measured by the image analysis software.
+
+### Learning Goals
+
+The primary issue with my analysis design is that each cell's activity is its own time-series, which makes it difficult or impossible to use with traditional machine learning tools (at least, in its current format). Thus, my first goal is to pre-process my time series data into a meaningful format for cell-by-cell and population level analyses. 
+
+<img src="plan.PNG">
+
+1. For single-cell analysis, I have the option of using the time series data of a single cell. However, treating each frame in the time series as its own indepedent variable is not realible; any slight jitter in the cell activity from trial to trial will make it impossible to find recurring patterns. To fix this, I will use a sliding window that takes the average of a few frames, effectively smoothing out the time series for each trial to allow a more liberal overlap of activity between trials.
+
+2. From the single-cell analysis, I have the option of taking the cell-by-cell predicted categories and inputting them into a random forest analysis to test whether neurons show any kind of 'democratic' coding for correct vs. incorrect attempts.
+
+3. For the population level analysis, I have the option of condensing my time series data into mean firing or total firing across the time series per cell, then using this overall activity score to predict behavioural events.
+
+4. Finally, I can also apply nilearn tools to compute a correlation matrix between cells, and using those correlation values as my features to predict behaioural events.
+
+
+### Tools
+
+* Python
+* Jupyter notebooks
+* nilearn
+* scikitlearn
+* MATLAB
+ 
+## Results 
+
+### Progress overview
+
+
+
+### Tools I learned during this project
+
+ 
+
+#### Deliverable 1: report template
+
+
+
+#### Deliverable 2: project gallery
+
+
+
+## Conclusion and acknowledgement
+
+## Future directions
 
 I will try to adapt what I learned from the fMRI machine learning tutorial to accomplish two goals:
 
@@ -58,38 +107,11 @@ Feature matrix = 42 subjects (trials) x 10,000 features (neurons)
 
 Target variable will be CATEGORICAL (Correct vs Incorrect vs. Neither). Predict which subject (Trial) belongs to which category (correct/incorrect decision) from the neuronal data.
 
-### Tools
-
-* Python
-* Jupyter notebooks
-* nilearn
-* scikitlearn
-* MATLAB
-
-### Deliverables
 
 At the end of this project, I aim to have:
 
 * Pairwise correlation data for neurons for each trial event in a session, possibly across different sessions (days)
 * A rough machine learning pipeline to decode different types of events in the behaviour
- 
-## Results 
 
-### Progress overview
-
-
-### Tools I learned during this project
-
- 
-
-#### Deliverable 1: report template
-
-
-
-#### Deliverable 2: project gallery
-
-
-
-## Conclusion and acknowledgement
 
 
