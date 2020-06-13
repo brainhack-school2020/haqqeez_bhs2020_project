@@ -20,7 +20,7 @@ The mouse completes the task with a miniatrue microscope (miniscope) implanted o
 
 This is what the camera sees. A MATLAB script takes each frame and determines which groups of pixels are neurons and which are not and tags and counts them.
 
-<img src="neurons4.gif" width=360>
+<div style="text-align:center"><img src="neurons4.gif" /></div>
 
 Once tagged, each neurons's brightness level is measured to infer calcium activity. The raster plots generated here looks similar to what you would see in 'spiking' data for single-unit electrophysiology.
 
@@ -48,7 +48,7 @@ Note: Ones and zeros here denote the cell being 'on' or 'off' for sake of simpli
 
 ### Learning Goals
 
-The primary issue with my analysis design is that each cell's activity is its own time-series, which makes it difficult or impossible to use with traditional machine learning tools (at least, in its current format). Thus, my first goal is to pre-process my time series data into a meaningful format for cell-by-cell and population level analyses. 
+The primary issue with my analysis design is that each cell's activity is its own time-series, which makes it difficult or impossible to use with traditional machine learning tools (at least, in its current format). Thus, my first goal is to pre-process my time series data into a meaningful format for cell-by-cell and population level analyses. My second goal is to use machine learning to predict and decode correct vs incorrect events from individual cell and population level activity.
 
 <img src="plan.PNG">
 
@@ -71,45 +71,57 @@ The primary issue with my analysis design is that each cell's activity is its ow
  
 ## Results 
 
-### Progress overview
+### Single Cell - Sliding window analysis
+
+Below are histograms depicting the distribution of test scores (top) and 5-fold cross validation scores (bottom) for three machine learning classifiers tested on 109 indiviual cells with windowed (4 frames) time-series data. Training and test data was shuffled and re-tested 50 times, and counts of cells that scored >80% accuracy on each test are tabulated next to each classifier method. 
+
+<img src="results1.PNG">
+
+Adding +1 to the Cell ID, it appears that cells 29, 25, and 4 most frequently scored above 80% prediction accuracy for correct vs. incorrect trial attempts. Let's see what they look like:
+
+<img src="cellplots.PNG">
+
+Here we can see visually that these cells do indeed differ significantly between correct and incorrect responses. These results were, in fact, already known. Several cells in the hippocampus are expected to light up whenever an animal receives a reward for a correct trial. Thus, the purpose of this test was just to validate that my machine learning tools were working properly.
+
+### Population level - 'democracy'
+
+Now then, what about population level activity? Is there something about the activity of all these cells, or groups of cells, that can indicate correct vs. incorrect response choices? One idea is to test whether hippocampal cells function as some kind of 'democracy'; where the predictions of individual neurons accounted together could somehow improve the overall accuracy of the machine learning tools.
+
+To do this, I took the predctions of each individual neuron from the training set of the linear SVC analysis and put it into a Random Forest classifier. Unfortunately, the results were quite poor (41.6% +/- 11% accuracy on cross validation). This isn't too suprising, as hippocampal cells aren't really expected to work 'democratically' to predict single, specific events.
+
+### Population level - Summed Activity
+
+Equally bad were the results of the summed time-series activity all 109 cells. This is again to be expected, as temporal dynamics cannot be ignored on the large timescales over which activity was averaged (over 2 seconds). Cells with distinct and specific activity in very narrow timeframes (left image) are treated the same as cells that fire sparsely, but the same amount overall, within the same time-frame (right image). However, this type of 'summed' activity might be more useful for more specific and narrow time windows of interest (<1 second) that are tied to specific, expected events. Accuracy might also improve by 'leaving out' features (i.e., cells) with inconsistent activity from the model. Indeed, not all cells would be expected to contribute equally (or at all) to the coding of a correct or incorrect trial.
+
+<img src="examplecell2.png">   <img src="examplecell1.png">
+
+### Population level - Cell-to-Cell Correlations
+
+Another way to look at population level activity is through cell-to-cell correlations, similar to what is done fMRI connectivity analyses. Except here, each region of interest is an individual neuron. Adapting the script learned from the machine learning with nilearn tutorial, I generated a 109 x 109 correlation matrix for all cells, as well as a feature matrix of 5800+ correlations between pairs of cells' windowed time series data: 
+
+<img src="crosscorr.png" width=440> <img src="featma.png" width=440>
+
+Feeding these featrues into a few machine learning classifiers, we get some cool test results (+ cross validation)!
+
+* SVC (rbf): 78.8% (82.5 +/- 10%)
+* Decision tree: 82.6% (65 +/- 10%)
+* Random forest: 73.5% (72.5 +/- 9%)
+
+It seems appears that looking at correlated activity is a reasonable approach for understanding correct vs. incorrect responses in this task, when the animal is collecting reward. This again makes intuitive sense, as we know that large populations of cells fire together whenever the animal receives a reward, so highly correlated activity would be indicative of a 'reward' event (and thus, a 'correct' event), perhaps even more so than any single cell's activity.
+
+## Conclusions
 
 
 
-### Tools I learned during this project
+## Acknowledgements
 
- 
-
-#### Deliverable 1: report template
-
-
-
-#### Deliverable 2: project gallery
-
-
-
-## Conclusion and acknowledgement
+I'd like to thank the BrainHack team for putting together this wonderfully fun and fascinating course on neural data science! I've learned a lot about how other neuroscientists are tackling their analyses and how best to share my data with collaborators and labmates. Special thanks to Yann and Loic for helping me out with the machine learning aspects of my project.
 
 ## Future directions
 
-I will try to adapt what I learned from the fMRI machine learning tutorial to accomplish two goals:
-
 * Define correlation matrices between neurons and compare strengths over time; does it change with learning?
 * Use machine learning to predict and decode correct vs incorrect events in the population activity of the cells.
-
-Recall from the machine learning tutorial, we looked at activity of different subjects. For each subject, activity for each brain region was averaged across time and then correlated with brain regions in a correlation matrix. We then took each correlation matrix and created a new feature matrix across all subjects, then looked for a target variable, age, across subjects.
-
-For my data I only have one animal and a few different days. So will have to adapt:
-
-Subjects = Trials (42 attempts/decisions made in a session)
-time_series array = (120 frames, 100 neurons)
-Correlation matrix for ONE subject (trial) = 100 x 100 neurons array
-Feature matrix = 42 subjects (trials) x 10,000 features (neurons)
-
-Target variable will be CATEGORICAL (Correct vs Incorrect vs. Neither). Predict which subject (Trial) belongs to which category (correct/incorrect decision) from the neuronal data.
-
-
-At the end of this project, I aim to have:
-
+* What does the 'connectome' of relevant correlations for specific events look like? How does it change over time?
 * Pairwise correlation data for neurons for each trial event in a session, possibly across different sessions (days)
 * A rough machine learning pipeline to decode different types of events in the behaviour
 
