@@ -107,23 +107,22 @@ Feeding these featrues into a few machine learning classifiers, we get some cool
 * Decision tree: 82.6% (65 +/- 10%)
 * Random forest: 73.5% (72.5 +/- 9%)
 
-It seems appears that looking at correlated activity is a reasonable approach for understanding correct vs. incorrect responses in this task, when the animal is collecting reward. This again makes intuitive sense, as we know that large populations of cells fire together whenever the animal receives a reward, so highly correlated activity would be indicative of a 'reward' event (and thus, a 'correct' event), perhaps even more so than any single cell's activity.
+It appears that looking at correlated activity is a reasonable approach for understanding correct vs. incorrect responses in this task, when the animal is collecting reward. This again makes intuitive sense, as we know that large populations of cells fire together whenever the animal receives a reward, so highly correlated activity would be indicative of a 'reward' event (and thus, a 'correct' event), perhaps even more so than any single cell's activity.
 
 ## Conclusions
 
+Here, we see that both single cell and population level analyses can be useful for modelling correct vs. incorrect performance on a reward-driven behavioural task. However, some methods seem to work better than others, and both the methods that do and do not work help us understand the functional dynamics of the hippocampal cells that govern certain aspects of reward-driven learning. 
 
+## Future directions
+
+* Use machine learning to predict and decode other events in the population activity of the cells, such as trial and object types.
+* What does the 'connectome' of relevant correlations for specific events look like? How does it change over time?
+* How does prediction accuracy for each of these tests change over time? Does this reflect anything about how the hippocampus handles the learning of new information? 
+* Create a polished machine learning pipeline to systematically decode different types of events in the behaviour and pick return a rank of the best models and their respective prediction accuracies and how they change over time.
 
 ## Acknowledgements
 
 I'd like to thank the BrainHack team for putting together this wonderfully fun and fascinating course on neural data science! I've learned a lot about how other neuroscientists are tackling their analyses and how best to share my data with collaborators and labmates. Special thanks to Yann and Loic for helping me out with the machine learning aspects of my project.
-
-## Future directions
-
-* Define correlation matrices between neurons and compare strengths over time; does it change with learning?
-* Use machine learning to predict and decode correct vs incorrect events in the population activity of the cells.
-* What does the 'connectome' of relevant correlations for specific events look like? How does it change over time?
-* Pairwise correlation data for neurons for each trial event in a session, possibly across different sessions (days)
-* A rough machine learning pipeline to decode different types of events in the behaviour
 
 
 
