@@ -1,4 +1,4 @@
-# haqqeez_bhs2020_project
+# Exploring machine learning tools for modelling behavioural events with calcium imaging data
 
 ## Summary 
 
