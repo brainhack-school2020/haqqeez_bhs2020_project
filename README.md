@@ -1,4 +1,4 @@
-# Exploring machine learning tools for modelling behavioural events with calcium imaging data
+# Exploring machine learning tools for modelling calcium imaging data to behavioural events
 
 ## Summary 
 
