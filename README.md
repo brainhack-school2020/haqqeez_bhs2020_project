@@ -50,7 +50,7 @@ Note: Ones and zeros here denote the cell being 'on' or 'off' for sake of simpli
 
 The primary issue with my analysis design is that each cell's activity is its own time-series, which makes it difficult or impossible to use with traditional machine learning tools (at least, in its current format). Thus, my first goal is to pre-process my time series data into a meaningful format for cell-by-cell and population level analyses. My second goal is to use machine learning to predict and decode correct vs incorrect events from individual cell and population level activity.
 
-<img src="plan.PNG">
+<img src="plan2.PNG">
 
 1. For single-cell analysis, I have the option of using the time series data of a single cell. However, treating each frame in the time series as its own indepedent variable is not realible; any slight jitter in the cell activity from trial to trial will make it impossible to find recurring patterns. To fix this, I will use a sliding window that takes the average of a few frames, effectively smoothing out the time series for each trial to allow a more liberal overlap of activity between trials.
 
